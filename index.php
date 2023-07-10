@@ -4,9 +4,9 @@ class Student
 {
     private string $firstname;
     private string $lastname;
-    // private int $age;
     private DateTime $birthdate;
     private string $grade;
+    private string $schoolName;
 
     public function __construct(string $firstname, string $lastname, DateTime $birthdate, string $grade)
     {
@@ -15,6 +15,10 @@ class Student
         $this->birthdate = $birthdate;
         $this->grade = $grade;
     }
+
+    // ----------------------
+    // Getters and Setters
+    // ----------------------
 
     public function setLastname(string $lastname): void
     {
@@ -54,6 +58,33 @@ class Student
     public function getGrade(): string
     {
         return $this->grade;
+    }
+
+    public function getSchoolName(): string
+    {
+        return $this->schoolName;
+    }
+
+    public function setSchoolName(string $schoolName): void
+    {
+        $this->schoolName = $schoolName;
+    }
+
+
+    // ----------------------
+    // Methods
+    // ----------------------
+    
+
+    public function __toString(): string
+    {
+        return 'Bonjour, je m\'appelle ' . $this->firstname . ' ' . $this->lastname . ', j\'ai ' . $this->getAge() . ' ans et je vais à l\'école ' . $this->schoolName . ' en class de ' . $this->grade . '.';
+    }
+
+    public function getAge(): int
+    {
+        return $this->birthdate->diff(new DateTime)->y;
+        // return $this->birthdate->diff(new DateTime)->format('%y');
     }
 }
 
@@ -137,8 +168,8 @@ class Student
             </p>
             <div class="exercice-sandbox">
                 <?php
-                    echo $maurice->getBirthdate()->format('Y-m-d') . '<br>';
-                    echo $michel->getBirthdate()->format('Y-m-d');
+                echo $maurice->getBirthdate()->format('Y-m-d') . '<br>';
+                echo $michel->getBirthdate()->format('Y-m-d');
                 ?>
             </div>
         </section>
@@ -152,7 +183,10 @@ class Student
                 Afficher l'âge des 2 élèves.
             </p>
             <div class="exercice-sandbox">
-
+                <?php
+                echo $michel->getFirstname() . ' : ' . $michel->getAge() . ' ans<br>';
+                echo $maurice->getFirstname() . ' : ' . $maurice->getAge() . ' ans<br>';
+                ?>
 
             </div>
         </section>
@@ -166,7 +200,14 @@ class Student
                 Ajouter la propriété et ajouter la donnée sur les élèves.
             </p>
             <div class="exercice-sandbox">
+                <?php
 
+                $michel->setSchoolName('Michel Drucker');
+                $maurice->setSchoolName('Guillaume Belleuvre');
+
+                var_dump($michel, $maurice);
+
+                ?>
             </div>
         </section>
 
@@ -175,12 +216,16 @@ class Student
             <h2 class="exercice-ttl">Question 6</h2>
             <p class="exercice-txt">
                 Donner la possibilité aux élèves de se présenter en affichant la phrase suivante :<br>
-                "Bonjour, je m'appelle XXX XXX, j'ai XX ans et je vais à l'école XXX en class de XXX.".
+                "Bonjour, je m'appelle XXX XXX, j'ai XX ans et je vais à l'école XXX en classe de XXX.".
                 <br>
                 Afficher la phrase de présentation des 2 élèves.
             </p>
             <div class="exercice-sandbox">
+                <?php
+                echo $michel . '<br>';
+                echo $maurice;
 
+                ?>
             </div>
         </section>
 

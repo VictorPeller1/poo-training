@@ -1,3 +1,98 @@
+<?php
+
+class Teacher
+{
+    private string $firstname;
+    private string $lastname;
+    private array $topics = [];
+    private ?string $school;
+
+    public function __construct(string $firstname, string $lastname, array $topics = [], ?string $school = null)
+    {
+        $this->lastname = $lastname;
+        $this->firstname = $firstname;
+        $this->topics = $topics;
+        $this->school = $school;
+    }
+
+    // ----------------------
+    // Getters and Setters
+    // ----------------------
+
+    public function setLastname(string $lastname): void
+    {
+        $this->lastname = $lastname;
+    }
+
+    public function getLastname(): string
+    {
+        return $this->lastname;
+    }
+
+    public function setFirstname(string $firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    public function setSchool(string $school): void
+    {
+        $this->school = $school;
+    }
+
+    public function getSchool(): string
+    {
+        return $this->school;
+    }
+
+    public function setTopics(array $topics): void
+    {
+        $this->topics = $topics;
+    }
+
+    public function getTopics(): array
+    {
+        return $this->topics;
+    }
+
+
+    // ----------------------
+    // Methods
+    // ----------------------
+
+    public function addTopic(string $topic): array
+    {
+        array_push($this->topics, $topic);
+        return $this->topics;
+    }
+
+    public function deleteTopic(string $topic): array
+    {
+        $index = array_search($topic, $this->topics);
+        if ($index !== false) {
+            unset($this->topics[$index]);
+        }
+        return $this->topics;
+    }
+
+    public function displayTopics(): string
+    {
+        return implode(' ', $this->topics);
+    }
+
+    public function __toString(): string
+    {
+        return "Bonjour, je m'appelle {$this->firstname} {$this->lastname} et j'enseigne à l'école {$this->school} les matières suivantes : {$this->displayTopics()}.";
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +119,7 @@
                 </ul>
             </nav>
         </header>
-        
+
         <!-- QUESTION 1 -->
         <section class="exercice">
             <h2 class="exercice-ttl">Question 1</h2>
@@ -36,11 +131,18 @@
                 Créer 2 professeurs différents.
             </p>
             <div class="exercice-sandbox">
-                
+                <?php
+
+                $clement = new Teacher('Clément', 'Dupond', ['Maths', 'Français'], 'Jules Verne');
+
+                $zora = new Teacher('Zora', 'Djebari');
+
+                var_dump($clement, $zora);
+                ?>
             </div>
         </section>
-        
-        
+
+
         <!-- QUESTION 2 -->
         <section class="exercice">
             <h2 class="exercice-ttl">Question 2</h2>
@@ -52,11 +154,16 @@
                 Afficher les écoles des 2 professeurs.
             </p>
             <div class="exercice-sandbox">
-                
+                <?php
+                $clement->setSchool('Jean Guehenno');
+                $zora->setSchool('Ecole de la rue');
+                echo $clement->getSchool() . '<br>';
+                echo $zora->getSchool() . '<br>';
+                ?>
             </div>
         </section>
-        
-        
+
+
         <!-- QUESTION 3 -->
         <section class="exercice">
             <h2 class="exercice-ttl">Question 3</h2>
@@ -66,7 +173,16 @@
                 Tester l'ajout, la suppression et l'affichage sur chacun des profs.
             </p>
             <div class="exercice-sandbox">
-                
+                <?php
+                $clement->addTopic('Sport');
+
+                var_dump($clement->displayTopics());
+
+                var_dump($clement->deleteTopic('Maths'));
+
+                var_dump($clement->displayTopics());
+                ?>
+
             </div>
         </section>
 
@@ -81,11 +197,15 @@
                 Afficher la phrase de présentation des 2 profs.
             </p>
             <div class="exercice-sandbox">
-                
+                <?php
+                echo $clement . '<br>';
+                echo $zora;
+                ?>
             </div>
         </section>
 
     </div>
     <div class="copyright">© Guillaume Belleuvre, 2023 - DWWM</div>
 </body>
+
 </html>

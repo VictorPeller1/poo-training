@@ -59,7 +59,7 @@
         <section class="exercice">
             <h2 class="exercice-ttl">Question 3</h2>
             <p class="exercice-txt"> 
-                Créer une méthode permettant d'interroger un type d'école pour savoir s'il prend en charge un niveu scolaire.
+                Créer une méthode permettant d'interroger un type d'école pour savoir s'il prend en charge un niveau scolaire.
                 <br>
                 Tester la méthode créée.
             </p>
