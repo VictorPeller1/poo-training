@@ -1,95 +1,9 @@
 <?php
+spl_autoload_register();
 
-class Student
-{
-    private string $firstname;
-    private string $lastname;
-    private DateTime $birthdate;
-    private string $grade;
-    private string $schoolName;
-
-    public function __construct(string $firstname, string $lastname, DateTime $birthdate, string $grade)
-    {
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->birthdate = $birthdate;
-        $this->grade = $grade;
-    }
-
-    // ----------------------
-    // Getters and Setters
-    // ----------------------
-
-    public function setLastname(string $lastname): void
-    {
-        $this->lastname = $lastname;
-    }
-
-    public function getLastname(): string
-    {
-        return $this->lastname;
-    }
-
-    public function setFirstname(string $firstname): void
-    {
-        $this->firstname = $firstname;
-    }
-
-    public function getFirstname(): string
-    {
-        return $this->firstname;
-    }
-
-    public function setBirthdate(DateTime $birthdate): void
-    {
-        $this->birthdate = $birthdate;
-    }
-
-    public function getBirthdate(): DateTime
-    {
-        return $this->birthdate;
-    }
-
-    public function setGrade(string $grade): void
-    {
-        $this->grade = $grade;
-    }
-
-    public function getGrade(): string
-    {
-        return $this->grade;
-    }
-
-    public function getSchoolName(): string
-    {
-        return $this->schoolName;
-    }
-
-    public function setSchoolName(string $schoolName): void
-    {
-        $this->schoolName = $schoolName;
-    }
-
-
-    // ----------------------
-    // Methods
-    // ----------------------
-    
-
-    public function __toString(): string
-    {
-        return 'Bonjour, je m\'appelle ' . $this->firstname . ' ' . $this->lastname . ', j\'ai ' . $this->getAge() . ' ans et je vais à l\'école ' . $this->schoolName . ' en class de ' . $this->grade . '.';
-    }
-
-    public function getAge(): int
-    {
-        return $this->birthdate->diff(new DateTime)->y;
-        // return $this->birthdate->diff(new DateTime)->format('%y');
-    }
-}
+use App\Objects\Student;
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,11 +43,11 @@ class Student
             </p>
             <div class="exercice-sandbox">
                 <?php
-                $michel = new Student('Michel', 'Samba', new DateTime('2000-11-22'), '6ème');
+                $michel = new Student('Michel', 'Samba', 'Michel Drucker',  new DateTime('2000-11-22'), '6ème');
 
                 var_dump($michel);
 
-                $maurice = new Student('Maurice', 'Poisson', new DateTime('1998-11-28'), '2nde');
+                $maurice = new Student('Maurice', 'Poisson', 'Michel Samba', new DateTime('1998-11-28'), '2nde');
                 var_dump($maurice);
 
                 ?>

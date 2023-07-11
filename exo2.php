@@ -1,98 +1,9 @@
 <?php
+spl_autoload_register();
 
-class Teacher
-{
-    private string $firstname;
-    private string $lastname;
-    private array $topics = [];
-    private ?string $school;
-
-    public function __construct(string $firstname, string $lastname, array $topics = [], ?string $school = null)
-    {
-        $this->lastname = $lastname;
-        $this->firstname = $firstname;
-        $this->topics = $topics;
-        $this->school = $school;
-    }
-
-    // ----------------------
-    // Getters and Setters
-    // ----------------------
-
-    public function setLastname(string $lastname): void
-    {
-        $this->lastname = $lastname;
-    }
-
-    public function getLastname(): string
-    {
-        return $this->lastname;
-    }
-
-    public function setFirstname(string $firstname): void
-    {
-        $this->firstname = $firstname;
-    }
-
-    public function getFirstname(): string
-    {
-        return $this->firstname;
-    }
-
-    public function setSchool(string $school): void
-    {
-        $this->school = $school;
-    }
-
-    public function getSchool(): string
-    {
-        return $this->school;
-    }
-
-    public function setTopics(array $topics): void
-    {
-        $this->topics = $topics;
-    }
-
-    public function getTopics(): array
-    {
-        return $this->topics;
-    }
-
-
-    // ----------------------
-    // Methods
-    // ----------------------
-
-    public function addTopic(string $topic): array
-    {
-        array_push($this->topics, $topic);
-        return $this->topics;
-    }
-
-    public function deleteTopic(string $topic): array
-    {
-        $index = array_search($topic, $this->topics);
-        if ($index !== false) {
-            unset($this->topics[$index]);
-        }
-        return $this->topics;
-    }
-
-    public function displayTopics(): string
-    {
-        return implode(' ', $this->topics);
-    }
-
-    public function __toString(): string
-    {
-        return "Bonjour, je m'appelle {$this->firstname} {$this->lastname} et j'enseigne à l'école {$this->school} les matières suivantes : {$this->displayTopics()}.";
-    }
-}
+use App\Objects\Teacher;
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -133,9 +44,9 @@ class Teacher
             <div class="exercice-sandbox">
                 <?php
 
-                $clement = new Teacher('Clément', 'Dupond', ['Maths', 'Français'], 'Jules Verne');
+                $clement = new Teacher('Clément', 'Dupond', 'Michel Drucker', ['Maths', 'Français'], 'Jules Verne');
 
-                $zora = new Teacher('Zora', 'Djebari');
+                $zora = new Teacher('Zora', 'Djebari', 'Michel Samba');
 
                 var_dump($clement, $zora);
                 ?>
