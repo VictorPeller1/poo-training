@@ -50,6 +50,8 @@ use App\Objects\Student;
                 $maurice = new Student('Maurice', 'Poisson', 'Michel Samba', new DateTime('1998-11-28'), '2nde');
                 var_dump($maurice);
 
+                echo $maurice->introduceMyself();
+
                 ?>
             </div>
         </section>

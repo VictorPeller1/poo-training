@@ -2,8 +2,26 @@
 
 namespace App\Objects;
 
-class Person
+abstract class Person
 {
+
+    // ----------------------
+    // Static
+    // ----------------------
+
+    protected static $introduce = 'Bonjour, je m\'appelle ##firstname## ##lastname##.';
+
+
+    public static function getIntroduction(array $datas): string
+    {
+        $search = array_map(fn ($v) => "##$v##", array_keys($datas));
+        return str_replace($search, array_values($datas), static::$introduce);
+    }
+
+    // ----------------------
+    // Instances
+    // ----------------------
+
     protected string $firstname;
     protected string $lastname;
     protected string $schoolName;
@@ -47,5 +65,17 @@ class Person
     public function setSchoolName(string $schoolName): void
     {
         $this->schoolName = $schoolName;
+    }
+
+    // ----------------------
+    // Methods
+    // ----------------------
+
+    public function introduceMyself(): string
+    {
+        return self::getIntroduction([
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname
+        ]);
     }
 }

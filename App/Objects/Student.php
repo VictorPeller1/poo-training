@@ -6,6 +6,17 @@ use DateTime;
 
 class Student extends Person
 {
+
+    // ----------------------
+    // Static
+    // ----------------------
+
+    protected static $introduce = 'Bonjour, je m\'appelle ##firstname## ##lastname## , j\'ai ##age## ans et je vais à l\'école ##schoolName## en classe de ##grade##.';
+
+    // ----------------------
+    // Instances
+    // ----------------------
+
     private DateTime $birthdate;
     private string $grade;
 
@@ -41,11 +52,9 @@ class Student extends Person
         return $this->grade;
     }
 
-
     // ----------------------
     // Methods
     // ----------------------
-    
 
     public function __toString(): string
     {
@@ -56,5 +65,16 @@ class Student extends Person
     {
         return $this->birthdate->diff(new DateTime)->y;
         // return $this->birthdate->diff(new DateTime)->format('%y');
+    }
+
+    public function introduceMyself(): string
+    {
+        return self::getIntroduction([
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'age' => $this->getAge(),
+            'schoolName' => $this->schoolName,
+            'grade' => $this->grade
+        ]);
     }
 }
