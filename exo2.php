@@ -3,23 +3,6 @@ spl_autoload_register();
 
 use App\Objects\Teacher;
 
-
-// $sentence = 'Bonjour je m\'appelle ##firstname## ##lastname##.';
-
-// $datas = [
-//     'firstname' => 'Michel',
-//     'lastname' => 'Dupond'
-// ];
-
-// $search = array_map(fn($v) => "##$v##", array_keys($datas));
-
-// $sentence = str_replace($search, array_values($datas), $sentence);
-// // $sentence = str_replace('lastname', $datas['lastname'], $sentence);
-
-
-// var_dump($sentence);
-
-// exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
