@@ -5,16 +5,26 @@ namespace App\Views;
 class View
 {
     // ----------------------
+    // Static
+    // ----------------------
+
+    protected static string $file;
+    protected const PATH = 'App/Templates';
+
+    private static function setFile(string $file): void
+    {
+        static::$file = $file;
+    }
+
+    // ----------------------
     // Instances
     // ----------------------
 
     private array $data = [];
-    private string $file;
 
-    public function __construct(array $data, string $file)
+    public function __construct(array $data)
     {
         $this->data = $data;
-        $this->file = $file;
     }
 
     // ----------------------
@@ -33,12 +43,7 @@ class View
 
     public function getFile(): string
     {
-        return $this->file;
-    }
-
-    public function setFile(string $file): void
-    {
-        $this->file = $file;
+        return self::PATH . '/' . static::$file;
     }
 
     // ----------------------
@@ -53,12 +58,17 @@ class View
 
     public function getTemplate(): string
     {
-        return file_get_contents($this->file);
+        return file_get_contents($this->getFile());
     }
 
     public function getContentHtml(): string
     {
         $search = array_map(fn ($v) => '{{' . $v . '}}', array_keys($this->data));
         return str_replace($search, array_values($this->data), $this->getTemplate());
+    }
+
+    public function display(): void
+    {
+        echo $this->getContentHtml();
     }
 }

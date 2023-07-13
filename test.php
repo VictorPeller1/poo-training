@@ -1,21 +1,24 @@
 <?php
 spl_autoload_register();
 
-use App\Views\View;
+use App\Controllers\ProductController;
 
-// $content = file_get_contents('App/Templates/page.html');
 
-$datas = [
-    'title' => 'Le titre de la page',
-    'title2' => 'Hello Word azr aze z',
-    'text' => 'Coucou les gens !'
-];
+$productController = new ProductController();
 
-// $search = array_map(fn ($v) => '{{'.$v.'}}', array_keys($datas));
-// $content = str_replace($search, array_values($datas), $content);
 
-// echo $content;
+// var_dump($_GET);
 
-$page = new View($datas, 'App/Templates/page.html');
 
-echo $page->getContentHtml();
+if (isset($_GET['action']) && $_GET['action'] === 'create') {
+    $productController->create();
+    exit;
+}
+
+
+if (isset($_GET['action']) && $_GET['action'] === 'show' && isset($_GET['id'])) {
+    $productController->show($_GET['id']);
+    exit;
+}
+
+$productController->index();

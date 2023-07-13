@@ -5,12 +5,50 @@ use App\Objects\Student;
 use App\Objects\ElementarySchool;
 use App\Objects\MiddleSchool;
 use App\Objects\HighSchool;
-
+use App\Views\Page;
+use App\Views\Question;
 
 $school3 = new ElementarySchool('Saint Michel', 'Saint Etienne');
 $school4 = new MiddleSchool('Saint Joseph', 'Caen');
 $school5 = new HighSchool('Saint Louis', 'Lyon');
 
+$pageContent = '';
+
+// QUESTION 1
+
+$michel = new Student('Michel', 'Samba', $school3,  new DateTime('2000-11-22'), '6ème');
+
+$maurice = new Student('Maurice', 'Poisson', $school4, new DateTime('1998-11-28'), '2nde');
+
+$q1 = new Question([
+    'title' => 'Question 1',
+    'question' => nl2br("Créer une classe permettant de créer des élèves ayant un nom, un prénom, un age et un niveau scolaire.
+                    Définir toutes les propriétés à l'instanciation.
+                    Créer 2 étudiants différents."),
+    'answer' => $michel->introduceMyself().' '.$maurice->introduceMyself(),
+]);
+
+
+$pageContent .= $q1->getContentHtml();
+
+
+$q2 = new Question([
+    'title' => 'Question 2',
+    'question' => nl2br("Question N2 ???"),
+    'answer' => 'Réponse',
+]);
+
+$pageContent .= $q2->getContentHtml();
+
+$page = new Page([
+    'title' => 'POO - Des élèves',
+    'mainTitle' => 'Programmation Orientée Objet - Des élèves',
+    'content' => $pageContent
+]);
+
+echo $page->getContentHtml();
+
+exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
