@@ -20,9 +20,9 @@ class Student extends Person
     private DateTime $birthdate;
     private string $grade;
 
-    public function __construct(string $firstname, string $lastname, string $schoolName, DateTime $birthdate, string $grade)
+    public function __construct(string $firstname, string $lastname, School $school, DateTime $birthdate, string $grade)
     {
-        parent::__construct($firstname, $lastname, $schoolName);
+        parent::__construct($firstname, $lastname, $school);
         $this->birthdate = $birthdate;
         $this->grade = $grade;
     }
@@ -42,9 +42,13 @@ class Student extends Person
         return $this->birthdate;
     }
 
-    public function setGrade(string $grade): void
+    public function setGrade(string $grade): bool
     {
-        $this->grade = $grade;
+        if ($this->school->isGradeInSchool($grade)) {
+            $this->grade = $grade;
+            return true;
+        }
+        return false;
     }
 
     public function getGrade(): string
@@ -58,7 +62,7 @@ class Student extends Person
 
     public function __toString(): string
     {
-        return 'Bonjour, je m\'appelle ' . $this->firstname . ' ' . $this->lastname . ', j\'ai ' . $this->getAge() . ' ans et je vais à l\'école ' . $this->schoolName . ' en class de ' . $this->grade . '.';
+        return 'Bonjour, je m\'appelle ' . $this->firstname . ' ' . $this->lastname . ', j\'ai ' . $this->getAge() . ' ans et je vais à l\'école ' . $this->school->getName() . ' en class de ' . $this->grade . '.';
     }
 
     public function getAge(): int
@@ -73,7 +77,7 @@ class Student extends Person
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'age' => $this->getAge(),
-            'schoolName' => $this->schoolName,
+            'schoolName' => $this->school->getName(),
             'grade' => $this->grade
         ]);
     }

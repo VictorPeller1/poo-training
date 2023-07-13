@@ -24,13 +24,13 @@ abstract class Person
 
     protected string $firstname;
     protected string $lastname;
-    protected string $schoolName;
+    protected School $school;
 
-    public function __construct(string $firstname, string $lastname, string $schoolName)
+    public function __construct(string $firstname, string $lastname, School $school)
     {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
-        $this->schoolName = $schoolName;
+        $this->school = $school;
     }
 
     // ----------------------
@@ -57,14 +57,14 @@ abstract class Person
         return $this->firstname;
     }
 
-    public function getSchoolName(): string
+    public function getSchool(): School
     {
-        return $this->schoolName;
+        return $this->school;
     }
 
-    public function setSchoolName(string $schoolName): void
+    public function setSchool(School $school): void
     {
-        $this->schoolName = $schoolName;
+        $this->school = $school;
     }
 
     // ----------------------

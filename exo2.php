@@ -2,6 +2,14 @@
 spl_autoload_register();
 
 use App\Objects\Teacher;
+use App\Objects\ElementarySchool;
+use App\Objects\MiddleSchool;
+use App\Objects\HighSchool;
+
+
+$school3 = new ElementarySchool('Saint Michel', 'Saint Etienne');
+$school4 = new MiddleSchool('Saint Joseph', 'Caen');
+$school5 = new HighSchool('Saint Louis', 'Lyon');
 
 ?>
 <!DOCTYPE html>
@@ -44,9 +52,9 @@ use App\Objects\Teacher;
             <div class="exercice-sandbox">
                 <?php
 
-                $clement = new Teacher('Clément', 'Dupond', 'Michel Drucker', ['Maths', 'Français'], 'Jules Verne');
+                $clement = new Teacher('Clément', 'Dupond', $school3, ['Maths', 'Français'], 'Jules Verne');
 
-                $zora = new Teacher('Zora', 'Djebari', 'Michel Samba');
+                $zora = new Teacher('Zora', 'Djebari', $school4);
 
                 var_dump($clement, $zora);
 
@@ -68,10 +76,10 @@ use App\Objects\Teacher;
             </p>
             <div class="exercice-sandbox">
                 <?php
-                $clement->setSchool('Jean Guehenno');
-                $zora->setSchool('Ecole de la rue');
-                echo $clement->getSchool() . '<br>';
-                echo $zora->getSchool() . '<br>';
+                $clement->setSchool($school5);
+                $zora->setSchool($school4);
+                echo $clement->getSchool()->getName() . '<br>';
+                echo $zora->getSchool()->getName() . '<br>';
                 ?>
             </div>
         </section>

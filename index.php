@@ -2,6 +2,14 @@
 spl_autoload_register();
 
 use App\Objects\Student;
+use App\Objects\ElementarySchool;
+use App\Objects\MiddleSchool;
+use App\Objects\HighSchool;
+
+
+$school3 = new ElementarySchool('Saint Michel', 'Saint Etienne');
+$school4 = new MiddleSchool('Saint Joseph', 'Caen');
+$school5 = new HighSchool('Saint Louis', 'Lyon');
 
 ?>
 <!DOCTYPE html>
@@ -43,11 +51,11 @@ use App\Objects\Student;
             </p>
             <div class="exercice-sandbox">
                 <?php
-                $michel = new Student('Michel', 'Samba', 'Michel Drucker',  new DateTime('2000-11-22'), '6ème');
+                $michel = new Student('Michel', 'Samba', $school3,  new DateTime('2000-11-22'), '6ème');
 
                 var_dump($michel);
 
-                $maurice = new Student('Maurice', 'Poisson', 'Michel Samba', new DateTime('1998-11-28'), '2nde');
+                $maurice = new Student('Maurice', 'Poisson', $school4, new DateTime('1998-11-28'), '2nde');
                 var_dump($maurice);
 
                 echo $maurice->introduceMyself();
@@ -118,8 +126,8 @@ use App\Objects\Student;
             <div class="exercice-sandbox">
                 <?php
 
-                $michel->setSchoolName('Michel Drucker');
-                $maurice->setSchoolName('Guillaume Belleuvre');
+                $michel->setSchool($school5);
+                $maurice->setSchool($school3);
 
                 var_dump($michel, $maurice);
 
